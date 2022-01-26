@@ -5,7 +5,6 @@ import clustering
 from sklearn.metrics import silhouette_score
 from scipy import sparse
 
-
 def plot_clustering(data,labels):
     """Get 2d scatter plot of clustering with colors indicating cluster membership.
     Used for plotting toy data set clusterings (e.g. figure 1.1).
@@ -54,6 +53,7 @@ def plot_persistence(data):
     hdbscanParam = {'min_cluster_size': 0, 'metric': 'cosine'}
     for i, cmin in enumerate(crange):
             hdbscanParam['min_cluster_size'] = cmin
+            hdbscanParam['metric'] = 'cosine'
             hdb = clustering.HDBSCAN(data,hdbscanParam)
             pers = sum(hdb.cluster_persistence_)
             stab[i] = pers
@@ -74,6 +74,7 @@ def plot_percentageclustered(data):
     hdbscanParam = {'min_cluster_size': 0, 'metric': 'cosine'}
     for i, cmin in enumerate(crange):
             hdbscanParam['min_cluster_size'] = cmin
+            hdbscanParam['metric'] = 'cosine'
             hdb = clustering.HDBSCAN(data,hdbscanParam)
             clustered = [l >= 0 for l in hdb.labels_]
             percclustered = (100*sum(clustered)) / len(clustered) if clustered else 0
@@ -87,7 +88,7 @@ def plot_percentageclustered(data):
     plt.show()
 
 def plot_sil_n_neighbors(data,affinity):
-    """Scatter silhouette score for a range of n_neighbors and k values,
+    """Scatter mean silhouette score for a range of n_neighbors and k values,
     given some affinity applicable to spectral clustering 
     (see clustering.py, appendix C).
     """

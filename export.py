@@ -1,15 +1,16 @@
-import preparedata
+import prepareData
 import NPM
 import clustering
 import analysis
 import pandas as pd
 from datetime import datetime
+import plots
 
 if __name__ == "__main__":
     """Running export.py as a main script exports results to excel sheet.
     The relevant parameters to tweak are contained in dictionaries
     ending in 'Param'. Explanation of the parameters can be found in the 
-    relevant module (e.g. dataParam --> preparedata.py).
+    relevant module (e.g. dataParam --> prepareData.py).
     """
 
     # importing ENIGMA data (clinical + covariates), plus extra covariate file including ADOS scores.
@@ -17,7 +18,7 @@ if __name__ == "__main__":
     PATH = "./DATA/ENIGMA-ASD.xlsx"
     PATHADOS = "./DATA/Covariates_allsites.xlsx"
 
-    # creating usable dataframe from .xlsx files (see 'preparedata.py')
+    # creating usable dataframe from .xlsx files (see 'prepareData.py')
 
     stripped = True
 
@@ -29,8 +30,8 @@ if __name__ == "__main__":
                 'includeICV': includeICV,
                 'includeTotalSurf': includeTotalSurf}
 
-    d = preparedata.StructuredData(PATH, PATHADOS, stripped, **dataParam)
-    d.printData()
+    d = prepareData.StructuredData(PATH, PATHADOS, stripped, **dataParam)
+    d.printDemographics()
 
     # creating a normative probability map (NPM) using gaussian process regression (see 'npm.py')
 
