@@ -4,6 +4,11 @@ import itertools
 
 #todo: add basic cohort info (after stripping)
 
+#random testing comment
+
+def lekkervermenigvuldigen(x= 100,y=0.5):
+    return x*y
+
 class StructuredData:
     """Extract arrays usable in Python from .xlsx data
 
